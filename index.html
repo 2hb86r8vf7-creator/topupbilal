@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TopUpBilal - Top Up Game</title>
+<style>
+:root{--bg:#090b18;--panel:#13172b;--panel2:#1a2040;--text:#f5f7ff;--muted:#aab1ce;--purple:#805cff;--cyan:#31d8e8;--line:#2a3154}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:radial-gradient(circle at top right,#25205b 0,#090b18 42%);color:var(--text)}
+header{position:sticky;top:0;z-index:5;background:#0b0e1deF;border-bottom:1px solid var(--line);backdrop-filter:blur(10px)}
+.nav{max-width:1100px;margin:auto;padding:15px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.logo{font-size:22px;font-weight:800}.logo span{color:var(--cyan)}
+nav{display:flex;gap:16px;align-items:center;flex-wrap:wrap}a{color:var(--muted);text-decoration:none;font-size:14px}a:hover{color:white}
+button{border:0;border-radius:10px;padding:11px 15px;font-weight:700;cursor:pointer;background:linear-gradient(100deg,var(--purple),#5c7cff);color:white}
+button.secondary{background:#252c4d;border:1px solid #3b456f}button.small{padding:8px 10px;font-size:12px}
+main{max-width:1100px;margin:auto;padding:28px 20px 60px}
+.hero{padding:42px 28px;border:1px solid #34305f;border-radius:22px;background:linear-gradient(120deg,#21194a,#152844);display:grid;grid-template-columns:1.3fr .7fr;gap:20px;align-items:center}
+.tag{display:inline-block;color:#a9f7ff;background:#153b51;border:1px solid #286779;border-radius:30px;padding:7px 12px;font-size:12px}
+h1{font-size:clamp(32px,5vw,54px);margin:16px 0 12px;line-height:1.05}h1 span{color:var(--cyan)}p{color:var(--muted);line-height:1.6}
+.hero-art{font-size:90px;text-align:center;filter:drop-shadow(0 12px 30px #0008)}
+.section-title{display:flex;justify-content:space-between;align-items:end;gap:10px;margin:34px 0 16px}.section-title h2{margin:0;font-size:25px}.section-title p{margin:5px 0 0;font-size:13px}
+.games{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.game{padding:18px;border-radius:16px;background:var(--panel);border:1px solid var(--line);cursor:pointer;transition:.2s}
+.game:hover,.game.active{border-color:var(--cyan);transform:translateY(-2px);background:var(--panel2)}
+.game .emoji{font-size:36px}.game h3{margin:12px 0 4px}.game small{color:var(--muted)}
+.layout{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:20px}
+.panel h3{margin:0 0 15px}.packages{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.package{background:#1b2140;border:1px solid #30395f;border-radius:12px;padding:13px;cursor:pointer}
+.package.selected{border-color:var(--cyan);box-shadow:0 0 0 1px var(--cyan) inset}
+.package b{display:block;margin-bottom:6px}.price{color:#79f3ff;font-weight:800}
+label{display:block;font-size:13px;color:#cbd1e9;margin:13px 0 7px}
+input,select{width:100%;background:#0c1021;border:1px solid #343c62;color:white;border-radius:10px;padding:12px;font-size:14px;outline:none}
+input:focus,select:focus{border-color:var(--cyan)}
+.payments{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}.pay{background:#1b2140;border:1px solid #30395f;border-radius:10px;padding:11px;cursor:pointer;text-align:center;font-size:13px}.pay.selected{border-color:var(--cyan)}
+.summary{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--line);color:var(--muted);font-size:14px}.summary strong{color:white}
+.notice{font-size:12px;color:#aab1ce;margin-top:12px}
+.hidden{display:none!important}.full{width:100%;margin-top:15px}
+table{width:100%;border-collapse:collapse;font-size:13px}th,td{text-align:left;padding:11px;border-bottom:1px solid var(--line)}th{color:#9fa9d1}
+footer{text-align:center;color:#7f88ac;padding:24px;border-top:1px solid var(--line);font-size:12px}
+.modal{position:fixed;inset:0;background:#000b;display:grid;place-items:center;padding:18px;z-index:10}.modalbox{width:min(420px,100%);background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:22px}
+@media(max-width:760px){.hero{grid-template-columns:1fr}.hero-art{display:none}.games{grid-template-columns:repeat(2,1fr)}.layout{grid-template-columns:1fr}nav{gap:9px}.nav{align-items:flex-start}.logo{font-size:18px}}
+@media(max-width:390px){.games{grid-template-columns:1fr 1fr}.packages{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header><div class="nav"><div class="logo">TopUp<span>Bilal</span></div><nav><a href="#games">Game</a><a href="#order">Top Up</a><a href="#history">Riwayat</a><button class="small" onclick="openLogin()">Login</button></nav></div></header>
+<main>
+<section class="hero"><div><span class="tag">TOP UP GAME • CEPAT & MUDAH</span><h1>Top up game favoritmu <span>di sini!</span></h1><p>Pilih game, tentukan paket, masukkan ID pemain, lalu pilih metode pembayaran. Praktis dalam satu tempat.</p><a href="#games"><button>Mulai Top Up</button></a></div><div class="hero-art">🎮</div></section>
+<div class="section-title" id="games"><div><h2>Pilih Game</h2><p>Pilih game yang ingin kamu top up.</p></div></div>
+<section class="games">
+<div class="game active" data-game="Mobile Legends" onclick="chooseGame(this)"><div class="emoji">⚔️</div><h3>Mobile Legends</h3><small>Diamond MLBB</small></div>
+<div class="game" data-game="Free Fire" onclick="chooseGame(this)"><div class="emoji">🔥</div><h3>Free Fire</h3><small>Diamond FF</small></div>
+<div class="game" data-game="PUBG Mobile" onclick="chooseGame(this)"><div class="emoji">🪖</div><h3>PUBG Mobile</h3><small>UC PUBG</small></div>
+<div class="game" data-game="Roblox" onclick="chooseGame(this)"><div class="emoji">🧱</div><h3>Roblox</h3><small>Robux</small></div>
+</section>
+<section class="layout" id="order">
+<div class="panel"><h3>1. Pilih Paket</h3><div class="packages" id="packages"></div>
+<label for="playerId">Game ID / User ID</label><input id="playerId" placeholder="Masukkan ID game">
+<label for="serverId">Server ID (jika diperlukan)</label><input id="serverId" placeholder="Masukkan Server ID (opsional)">
+</div>
+<div class="panel"><h3>2. Pembayaran</h3><div class="payments">
+<div class="pay selected" data-pay="QRIS" onclick="choosePay(this)">▦ QRIS</div><div class="pay" data-pay="DANA" onclick="choosePay(this)">DANA</div><div class="pay" data-pay="GoPay" onclick="choosePay(this)">GoPay</div><div class="pay" data-pay="OVO" onclick="choosePay(this)">OVO</div>
+</div><div class="summary"><span>Game</span><strong id="sumGame">Mobile Legends</strong></div><div class="summary"><span>Paket</span><strong id="sumPackage">Belum dipilih</strong></div><div class="summary"><span>Total</span><strong class="price" id="sumPrice">Rp0</strong></div>
+<button class="full" onclick="placeOrder()">Buat Pesanan</button><div class="notice">Demo tugas sekolah: pembayaran hanya simulasi. Tidak ada transaksi uang sungguhan dan pesanan tidak dikirim ke server.</div></div>
+</section>
+<section class="panel" id="history" style="margin-top:20px"><div class="section-title" style="margin:0 0 12px"><div><h2>Riwayat Pesanan</h2><p>Riwayat tersimpan di browser perangkat ini.</p></div></div><div id="historyContent"><p>Belum ada pesanan.</p></div></section>
+<section class="panel hidden" id="adminPanel" style="margin-top:20px"><h2>Dashboard Admin</h2><p>Kelola status pesanan demo.</p><div id="adminOrders"></div></section>
+<section class="panel hidden" id="userPanel" style="margin-top:20px"><h2>Dashboard Pengguna</h2><p id="userWelcome"></p><button class="secondary small" onclick="logout()">Keluar</button></section>
+</main>
+<footer>© 2026 TopUpBilal • Website demo untuk proyek sekolah</footer>
+<div class="modal hidden" id="loginModal"><div class="modalbox"><h2>Login Akun</h2><p>Masuk sebagai pengguna atau admin demo.</p><label>Username</label><input id="username" placeholder="Username"><label>Password</label><input id="password" type="password" placeholder="Password"><button class="full" onclick="login()">Masuk</button><button class="full secondary" onclick="closeLogin()">Batal</button><p class="notice">Admin: admin123 / admin123<br>Pengguna: user123 / user123</p></div></div>
+<script>
+const catalog={
+"Mobile Legends":[["86 Diamonds","Rp20.000"],["172 Diamonds","Rp39.000"],["257 Diamonds","Rp58.000"],["344 Diamonds","Rp77.000"],["706 Diamonds","Rp155.000"],["1412 Diamonds","Rp305.000"]],
+"Free Fire":[["70 Diamonds","Rp10.000"],["140 Diamonds","Rp20.000"],["355 Diamonds","Rp49.000"],["720 Diamonds","Rp98.000"],["1450 Diamonds","Rp195.000"],["Membership Mingguan","Rp30.000"]],
+"PUBG Mobile":[["60 UC","Rp16.000"],["325 UC","Rp79.000"],["660 UC","Rp159.000"],["1800 UC","Rp399.000"],["3850 UC","Rp799.000"],["8100 UC","Rp1.599.000"]],
+"Roblox":[["80 Robux","Rp16.000"],["160 Robux","Rp32.000"],["400 Robux","Rp79.000"],["800 Robux","Rp159.000"],["1700 Robux","Rp319.000"],["4500 Robux","Rp799.000"]]
+};
+let game="Mobile Legends", selected=null, payment="QRIS", user=null;
+const rupiah=s=>s;
+function renderPackages(){document.getElementById("packages").innerHTML=catalog[game].map((p,i)=>`<div class="package ${selected===i?'selected':''}" onclick="selectPackage(${i})"><b>${p[0]}</b><span class="price">${p[1]}</span></div>`).join("");document.getElementById("sumGame").textContent=game;document.getElementById("sumPackage").textContent=selected===null?"Belum dipilih":catalog[game][selected][0];document.getElementById("sumPrice").textContent=selected===null?"Rp0":catalog[game][selected][1]}
+function chooseGame(el){document.querySelectorAll(".game").forEach(x=>x.classList.remove("active"));el.classList.add("active");game=el.dataset.game;selected=null;renderPackages()}
+function selectPackage(i){selected=i;renderPackages()}
+function choosePay(el){document.querySelectorAll(".pay").forEach(x=>x.classList.remove("selected"));el.classList.add("selected");payment=el.dataset.pay}
+function getOrders(){return JSON.parse(localStorage.getItem("tb_orders")||"[]")}
+function saveOrders(a){localStorage.setItem("tb_orders",JSON.stringify(a))}
+function placeOrder(){const id=document.getElementById("playerId").value.trim();if(!id)return alert("Masukkan Game ID terlebih dahulu.");if(selected===null)return alert("Pilih paket top up terlebih dahulu.");const p=catalog[game][selected];const order={number:"TB"+Date.now().toString().slice(-7),game,package:p[0],price:p[1],id,server:document.getElementById("serverId").value.trim(),payment,status:"Menunggu Pembayaran",date:new Date().toLocaleString("id-ID")};let a=getOrders();a.unshift(order);saveOrders(a);alert("Pesanan demo berhasil dibuat! Silakan lihat riwayat pesanan.");renderHistory();if(user?.role==="admin")renderAdmin()}
+function renderHistory(){let a=getOrders();let el=document.getElementById("historyContent");if(!a.length){el.innerHTML="<p>Belum ada pesanan.</p>";return}el.innerHTML="<div style='overflow:auto'><table><tr><th>Pesanan</th><th>Game</th><th>Paket</th><th>Total</th><th>Status</th></tr>"+a.map(o=>`<tr><td>${o.number}</td><td>${o.game}</td><td>${o.package}</td><td>${o.price}</td><td>${o.status}</td></tr>`).join("")+"</table></div>"}
+function openLogin(){document.getElementById("loginModal").classList.remove("hidden")}function closeLogin(){document.getElementById("loginModal").classList.add("hidden")}
+function login(){let u=document.getElementById("username").value,p=document.getElementById("password").value;if(u==="admin123"&&p==="admin123"){user={name:u,role:"admin"}}else if(u==="user123"&&p==="user123"){user={name:u,role:"user"}}else{return alert("Username atau password salah.")}closeLogin();document.getElementById("userPanel").classList.remove("hidden");document.getElementById("userWelcome").textContent="Selamat datang, "+user.name+".";if(user.role==="admin"){document.getElementById("adminPanel").classList.remove("hidden");renderAdmin()}alert("Login berhasil sebagai "+user.role)}
+function logout(){user=null;document.getElementById("userPanel").classList.add("hidden");document.getElementById("adminPanel").classList.add("hidden")}
+function renderAdmin(){let a=getOrders(),el=document.getElementById("adminOrders");if(!a.length){el.innerHTML="<p>Belum ada pesanan.</p>";return}el.innerHTML="<div style='overflow:auto'><table><tr><th>Pesanan</th><th>Game / ID</th><th>Total</th><th>Status</th><th>Ubah status</th></tr>"+a.map((o,i)=>`<tr><td>${o.number}</td><td>${o.game} / ${o.id}</td><td>${o.price}</td><td>${o.status}</td><td><select onchange="changeStatus(${i},this.value)"><option ${o.status==="Menunggu Pembayaran"?"selected":""}>Menunggu Pembayaran</option><option ${o.status==="Diproses"?"selected":""}>Diproses</option><option ${o.status==="Selesai"?"selected":""}>Selesai</option><option ${o.status==="Dibatalkan"?"selected":""}>Dibatalkan</option></select></td></tr>`).join("")+"</table></div>"}
+function changeStatus(i,s){let a=getOrders();a[i].status=s;saveOrders(a);renderAdmin();renderHistory()}
+renderPackages();renderHistory();
+</script>
+</body>
+</html>
